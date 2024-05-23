@@ -9,7 +9,9 @@ export default function RootLayout({
   return (
     
        <ManuDash>
-        {children}
+         <main className="container">
+            {children}
+         </main>
        </ManuDash>
   )
 }

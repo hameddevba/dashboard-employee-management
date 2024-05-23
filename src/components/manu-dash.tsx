@@ -11,19 +11,19 @@ export default function ManuDash({
                 <ul>
                     <li className="mb-3">
                     <a href="/dash/card" className="block py-2 px-3 rounded hover:bg-gray-700">
-                        Link 1
+                        Liste
                     </a>
                     </li>
                     <li className="mb-3">
                     <a href="/dash" className="block py-2 px-3 rounded hover:bg-gray-700">
-                        Link 2
+                        Add
                     </a>
                     </li>
-                    <li className="mb-3">
+                    {/* <li className="mb-3">
                     <a href="#" className="block py-2 px-3 rounded hover:bg-gray-700">
                         Link 3
                     </a>
-                    </li>
+                    </li> */}
                 </ul>
                 </nav>
             </div>
