@@ -9,9 +9,11 @@ export default function RootLayout({
   return (
     
        <ManuDash>
-         <main className="container">
-            {children}
-         </main>
+         <div className="container">
+            <div className="flex justify-center items-center h-full">
+               {children}
+            </div>
+         </div>
        </ManuDash>
   )
 }

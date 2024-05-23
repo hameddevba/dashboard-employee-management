@@ -89,26 +89,36 @@ export const columns: ColumnDef<Payment>[] = [
         aria-label="Select row"
       />
     ),
-    enableSorting: false,
-    enableHiding: false,
+      enableSorting: false,
+      enableHiding: false,
   },
   {
-   accessorKey:"name",
-   header: "Name",
-   cell:({row})=> row.getValue("name")+""
+      accessorKey:"name",
+      header: "Name",
+      cell:({row})=> row.getValue("name")+""
   },
   {
-   accessorKey:"lastName",
-   header: "LastName",
-   cell:({row})=> row.getValue("lastName")+"              "
+      accessorKey:"lastName",
+      header: "LastName",
+      cell:({row})=> row.getValue("lastName")+"              "
   },
   {
-    accessorKey: "status",
-    header: "Status",
-    cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("status")}</div>
+      accessorKey: "status",
+      header: "Status",
+      cell: ({ row }) => (
+         <div className="capitalize">{row.getValue("status")}</div>
     ),
   },
+  {
+      accessorKey: "phone",
+      header: "Phone",
+      cell:({row})=> row.getValue("phone")+"              "
+   },
+   {
+      accessorKey: "nni",
+      header: "NNI",
+      cell:({row})=> row.getValue("nni")+"              "
+   },
   {
     accessorKey: "email",
     header: ({ column }) => {
@@ -221,7 +231,10 @@ export default function DataTableDemo() {
 
 
   return (
-    <div className="w-full">
+    <div className="w-full mt-4">
+      <div className="my-4">
+         <h1 className="text-center text-4xl">Employees Table </h1>
+      </div>
       <div className="flex items-center py-4">
         <Input
           placeholder="Filter emails..."

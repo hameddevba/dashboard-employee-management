@@ -27,7 +27,7 @@ export default function ManuDash({
                 </ul>
                 </nav>
             </div>
-            <div className="flex-1 p-1 overflow-y-scroll">
+            <div className="flex-1 overflow-auto w-100% h-screen ">
                 {children}
             </div>
     </div>
