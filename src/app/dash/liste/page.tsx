@@ -35,7 +35,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { fetchPayments, generateRandomPayments, Payment } from "./randomPayment"
+import { Employees, generateRandomEmployee } from "./randomEmployee"
+import { employeeTable, InsertEmployee } from "../../../../db/schema"
+import { createEmployee } from "../../../../db/queries"
+import { db } from "../../../../db/db"
+
 
 // const data: Payment[] = [
 //   {
@@ -69,7 +73,7 @@ import { fetchPayments, generateRandomPayments, Payment } from "./randomPayment"
 
 
 
-export const columns: ColumnDef<Payment>[] = [
+export const columns: ColumnDef<Employees>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -102,13 +106,13 @@ export const columns: ColumnDef<Payment>[] = [
       header: "LastName",
       cell:({row})=> row.getValue("lastName")+"              "
   },
-  {
-      accessorKey: "status",
-      header: "Status",
-      cell: ({ row }) => (
-         <div className="capitalize">{row.getValue("status")}</div>
-    ),
-  },
+//   {
+//       accessorKey: "status",
+//       header: "Status",
+//       cell: ({ row }) => (
+//          <div className="capitalize">{row.getValue("status")}</div>
+//     ),
+//   },
   {
       accessorKey: "phone",
       header: "Phone",
@@ -116,7 +120,7 @@ export const columns: ColumnDef<Payment>[] = [
    },
    {
       accessorKey: "nni",
-      header: "NNI",
+      header: "nni",
       cell:({row})=> row.getValue("nni")+"              "
    },
   {
@@ -135,18 +139,18 @@ export const columns: ColumnDef<Payment>[] = [
     cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>,
   },
   {
-    accessorKey: "amount",
-    header: () => <div className="text-right">Amount</div>,
+    accessorKey: "code",
+    header: () => <div className="text-right">code</div>,
     cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("amount"))
+      const code = parseFloat(row.getValue("code"))
 
       // Format the amount as a dollar amount
-      const formatted = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-      }).format(amount)
+      // const formatted = new Intl.NumberFormat("en-US", {
+      //   style: "currency",
+      //   currency: "USD",
+      // }).format(code)
 
-      return <div className="text-right font-medium w-1/2">{formatted}</div>
+      return <div className="text-right font-medium w-1/2">{row.getValue("code")}</div>
     },
   },
   {
@@ -189,19 +193,19 @@ export default function DataTableDemo() {
     React.useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = React.useState({})
 
-  const [data, setData] = React.useState<Payment[]>([]);
+  const [data, setData] = React.useState<InsertEmployee[]>([]);
 
 
 
   React.useEffect(() => {
 
-   
-
    const loadPayments = async () => {
      try {
       //  const data = await fetchPayments();
-      const data = generateRandomPayments(60)
-       setData(data);
+         const data:InsertEmployee[]= await generateRandomEmployee(40);
+         setData(data);
+         console.log(data)
+         createEmployee(data);
      } catch (err) {
       return('Failed to load payments');
      } 
@@ -209,6 +213,9 @@ export default function DataTableDemo() {
 
    loadPayments();
  }, []);
+
+
+ 
 
   const table = useReactTable({
     data,
@@ -326,7 +333,7 @@ export default function DataTableDemo() {
           {table.getFilteredSelectedRowModel().rows.length} of{" "}
           {table.getFilteredRowModel().rows.length} row(s) selected.
           {table.getSelectedRowModel().flatRows.map((el) => {
-            return <li key={el.id}>{JSON.stringify(el.original.NNI)}</li>;
+            return <li key={el.id}>{JSON.stringify(el.original.nni)}</li>;
           })}
         </div>
         <div className="space-x-2">
