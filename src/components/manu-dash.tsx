@@ -5,17 +5,17 @@ export default function ManuDash({
 }){
     return (
          <div className="flex h-screen">
-            <div className="w-64 bg-gray-800 text-white p-5">
+            <div className=" bg-gray-800 text-white p-5">
                 <h2 className="text-2xl font-bold mb-5">Dashboard</h2>
                 <nav>
                 <ul>
                     <li className="mb-3">
-                    <a href="/dash/card" className="block py-2 px-3 rounded hover:bg-gray-700">
+                    <a href="/dashboard/lists" className="block py-2 px-3 rounded hover:bg-gray-700">
                         Liste
                     </a>
                     </li>
                     <li className="mb-3">
-                    <a href="/dash" className="block py-2 px-3 rounded hover:bg-gray-700">
+                    <a href="/dash/add" className="block py-2 px-3 rounded hover:bg-gray-700">
                         Add
                     </a>
                     </li>

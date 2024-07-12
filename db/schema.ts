@@ -6,7 +6,7 @@ export const employeeTable = pgTable('employee_table', {
   lastName: text('lastName'),
   nni:text('nni').notNull().unique(),
   age: integer('age').notNull(),
-  phone: integer('phone').notNull(),
+  phone: integer('phone').notNull().unique(),
   email: text('email').notNull().unique(),
   code: text('code').notNull().unique(),
 });
