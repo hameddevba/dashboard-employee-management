@@ -44,5 +44,6 @@
     "postgres": "^3.4.4",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
-  }
+  },
+  "packageManager" : "pnpm"
 }
