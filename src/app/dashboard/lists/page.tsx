@@ -52,23 +52,23 @@ export default function DataTableDemo() {
 
   const [data, setData] = React.useState<InsertEmployee[]>([]);
 
-  const loadPayments = async () => {
-   try {
-   //  const data = await fetchPayments();
-      // const data:InsertEmployee[]= await generateRandomEmployee(40);
-      const data:SelectEmployee[] = await getAllEmployees(); 
+   const loadPayments = async () => {
+      try {
+      //  const data = await fetchPayments();
+         // const data:InsertEmployee[]= await generateRandomEmployee(40);
+         const data:SelectEmployee[] = await getAllEmployees(); 
 
-      setData(data);
-      console.log(data)
-      // createEmployee(data);
-  } catch (err) {
-   return('Failed to load payments');
-  } 
-};
+         setData(data);
+         console.log(data)
+         // createEmployee(data);
+      } catch (err) {
+         return('Failed to load payments');
+      } 
+   };
 
-  React.useEffect(() => {
+   React.useEffect(() => {
       loadPayments();
- }, []);
+   }, []);
 
 
  

@@ -1,6 +1,5 @@
 
-import { createEmployee } from "../../../../db/queries"
-import { employeeTable, InsertEmployee } from "../../../../db/schema";
+
 
 
 
@@ -16,7 +15,7 @@ import { employeeTable, InsertEmployee } from "../../../../db/schema";
 //  }
 
 
-export const generateRandomEmployee =  (count: number): InsertEmployee[] => {
+export const generateRandomEmployee =  (count: number) => {
      const data= Array.from({ length: count }, (_, index) => ({
      name: `Name${index}`,
      nni: `${Math.floor(100000000 + Math.random() * 900000000)}`,

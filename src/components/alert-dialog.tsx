@@ -12,7 +12,7 @@ import {
  import { Button } from "@/components/ui/button"
 import { deleteEmployee } from "../../db/queries"
  
- export function AlertDialogView({ id }:{id:number}) {
+ export function AlertDialogView({ id }:{id:any}) {
    return (
      <AlertDialog>
        <AlertDialogTrigger asChild>

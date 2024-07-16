@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/dialog"
 import InputForm from "./form"
 import { z } from "zod"
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { createEmployee, getEmployeeById, updateEmployee } from "../../db/queries";
 import { checkBySelected } from "../../db/queries"
 
@@ -60,14 +60,14 @@ const wait = () => new Promise((resolve) => setTimeout(resolve, 800));
 
 
 
-export function FormDialogView({ id = null, children }:{id:number|null, children:React.ReactNode}) {
+export function FormDialogView({ id = null, children }:{id:null|any, children:React.ReactNode}) {
 
    const [open, setOpen] = useState(false);
    // const [employeeId, setEmployeeId] = useState(id)
 
-   const [employee, setEmployee] =useState({
+   const [employee, setEmployee] = useState({
       name: "",
-      lastName: "",
+      lastName:"" && null,
       age: "",
       phone: "",
       email: "",
@@ -109,10 +109,12 @@ export function FormDialogView({ id = null, children }:{id:number|null, children
             if (data.length > 0) {
                const val = data[0];
 
+               typeof(val.lastName)=="string";
+
                setEmployee({
                   ...employee,
                   name: val.name,
-                  lastName: val.lastName,
+                  lastName: val.lastName ?? "", 
                   age: val.age.toString(),
                   phone: val.phone.toString(),
                   email: val.email,
