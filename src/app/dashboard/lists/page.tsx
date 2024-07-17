@@ -54,13 +54,8 @@ export default function DataTableDemo() {
 
    const loadPayments = async () => {
       try {
-      //  const data = await fetchPayments();
-         // const data:InsertEmployee[]= await generateRandomEmployee(40);
          const data:SelectEmployee[] = await getAllEmployees(); 
-
          setData(data);
-         console.log(data)
-         // createEmployee(data);
       } catch (err) {
          return('Failed to load payments');
       } 
@@ -98,7 +93,7 @@ export default function DataTableDemo() {
          <div className="my-4">
             <h1 className="text-center text-4xl">Employees Table </h1>
          </div>
-         <div className="flex items-center py-4">
+      <div className="flex items-center py-4">
          <Input
             placeholder="Filter emails..."
             value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
@@ -110,40 +105,40 @@ export default function DataTableDemo() {
          
          <div className="ml-auto">
 
-         <Button className="mr-3" onClick={()=>loadPayments()}>Refresh</Button>
+            <Button className="mr-3" onClick={()=>loadPayments()}>Refresh</Button>
 
-         <FormDialogView id={null}>
-               <Button className="mr-3" variant="outline" >Ajouter</Button>
-         </FormDialogView>
+            <FormDialogView id={null}>
+                  <Button className="mr-3" variant="outline" >Add</Button>
+            </FormDialogView>
 
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
-              Columns <ChevronDown className="ml-2 h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            {table
-              .getAllColumns()
-              .filter((column) => column.getCanHide())
-              .map((column) => {
-                return (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    className="capitalize"
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(value) =>
-                      column.toggleVisibility(!!value)
-                    }
-                  >
-                    {column.id}
-                  </DropdownMenuCheckboxItem>
-                )
-              })}
-          </DropdownMenuContent>
-        </DropdownMenu>
+            <DropdownMenu>
+               <DropdownMenuTrigger asChild>
+                  <Button variant="outline" className="ml-auto">
+                  Columns <ChevronDown className="ml-2 h-4 w-4" />
+                  </Button>
+               </DropdownMenuTrigger>
+               <DropdownMenuContent align="end">
+                  {table
+                  .getAllColumns()
+                  .filter((column) => column.getCanHide())
+                  .map((column) => {
+                     return (
+                        <DropdownMenuCheckboxItem
+                        key={column.id}
+                        className="capitalize"
+                        checked={column.getIsVisible()}
+                        onCheckedChange={(value) =>
+                              column.toggleVisibility(!!value)
+                           }
+                        >
+                        {column.id}
+                        </DropdownMenuCheckboxItem>
+                     )
+                  })}
+               </DropdownMenuContent>
+            </DropdownMenu>
 
-        </div>
+         </div>
       </div>
 
       <div className="rounded-md border">

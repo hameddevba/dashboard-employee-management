@@ -59,9 +59,9 @@ export default function InputForm({
     <Form {...form}>
      
       <DialogHeader>
-         <DialogTitle>Ajouter profile</DialogTitle>
-         <DialogDescription>
-            Make changes to your profile here. Click save when you're done.
+         <DialogTitle className="text-center text-2xl font-bold">PROFILE</DialogTitle>
+         <DialogDescription className="text-center">
+            Make changes here. Click save when you're done.
          </DialogDescription>
       </DialogHeader>
         

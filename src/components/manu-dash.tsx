@@ -11,7 +11,7 @@ export default function ManuDash({
                 <ul>
                     <li className="mb-3">
                     <a href="/dashboard/lists" className="block py-2 px-3 rounded hover:bg-gray-700">
-                        Liste
+                        Lists
                     </a>
                     </li>
                     {/* <li className="mb-3">

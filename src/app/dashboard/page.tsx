@@ -49,20 +49,11 @@ const Header = () => {
                  </svg>
                  <span className="relative">The</span>
                </span>{' '}
-               quick, brown fox jumps over a lazy dog
+               Employee Management Dashboard Application
              </h2>
              <p className="text-base text-gray-700 md:text-lg">
-               Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-               accusantium doloremque rem aperiam, eaque ipsa quae.
+             This application will be an employee management dashboard built with Next.js. It will allow HR personnel or managers to view, edit, and manage employee information, as well as track performance and other relevant data.
              </p>
-           </div>
-           <div>
-             <a
-               href="/"
-               className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-             >
-               Get started
-             </a>
            </div>
          </div>
        </div>
