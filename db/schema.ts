@@ -9,6 +9,7 @@ export const employeeTable = pgTable('employee_table', {
   phone: integer('phone').notNull().unique(),
   email: text('email').notNull().unique(),
   code: text('code').notNull().unique(),
+  imageName: text('image-name').unique()
 });
 
 

@@ -31,10 +31,10 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
-import { FormDialogView } from "@/components/form-dialog"
 import columns from "./columns"
 import { InsertEmployee, SelectEmployee } from "../../../../db/schema"
 import { getAllEmployees } from "../../../../db/queries"
+import Link from "next/link"
 
 
 
@@ -42,28 +42,28 @@ import { getAllEmployees } from "../../../../db/queries"
 
 export default function DataTableDemo() {
 
+   
   const [sorting, setSorting] = React.useState<SortingState>([])
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
-  )
-  const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({})
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
+  const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = React.useState({})
 
   const [data, setData] = React.useState<InsertEmployee[]>([]);
 
-   const loadPayments = async () => {
+
+   const LoadData = async () => {
       try {
          const data:SelectEmployee[] = await getAllEmployees(); 
          setData(data);
       } catch (err) {
-         return('Failed to load payments');
+         return('Failed to load data');
       } 
    };
 
+
    React.useEffect(() => {
-      loadPayments();
-   }, []);
+      LoadData();
+   },[]);
 
 
  
@@ -104,12 +104,9 @@ export default function DataTableDemo() {
          />
          
          <div className="ml-auto">
-
-            <Button className="mr-3" onClick={()=>loadPayments()}>Refresh</Button>
-
-            <FormDialogView id={null}>
-                  <Button className="mr-3" variant="outline" >Add</Button>
-            </FormDialogView>
+            <Button className="mr-3" variant="outline" >
+               <Link href="/dashboard/add" className="uppercase">Add a new employee</Link>
+            </Button>
 
             <DropdownMenu>
                <DropdownMenuTrigger asChild>

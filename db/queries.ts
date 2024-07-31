@@ -1,5 +1,5 @@
 "use server"
-import { eq } from 'drizzle-orm';
+import { desc, eq } from 'drizzle-orm';
 import { db } from './db'
 import { employeeTable, InsertEmployee, SelectEmployee } from './schema'
 
@@ -66,5 +66,17 @@ export async function checkBySelected(type: string, value: any) {
       return null;
    }
 }
+
+
+export async function getCode(){
+   return await db
+   .select({
+     code: employeeTable.code,
+   })
+   .from(employeeTable)
+   .orderBy(desc(employeeTable.id))
+   .limit(1);
+}
+
 
 

@@ -4,34 +4,29 @@ import { ColumnDef } from "@tanstack/react-table"
  import { Button } from "@/components/ui/button"
  import { Checkbox } from "@/components/ui/checkbox"
  import { InsertEmployee } from "../../../../db/schema"
-import { FormDialogView } from "@/components/form-dialog"
-import { AlertDialogView } from "@/components/alert-dialog"
 
+
+import {
+   DropdownMenu,
+   DropdownMenuContent,
+   DropdownMenuItem,
+   DropdownMenuLabel,
+   DropdownMenuSeparator,
+   DropdownMenuTrigger,
+ } from "@/components/ui/dropdown-menu"
+import Link from "next/link"
+import { useEffect } from "react"
+import supabase from "@/lib/supabase-init"
+import Image from "next/image"
+import {
+   Avatar,
+   AvatarFallback,
+   AvatarImage,
+ } from "@/components/ui/avatar"
 
 
 const columns: ColumnDef<InsertEmployee>[] = [
-   {
-      id: "select",
-      header: ({ table }) => (
-        <Checkbox
-          checked={
-            table.getIsAllPageRowsSelected() ||
-            (table.getIsSomePageRowsSelected() && "indeterminate")
-          }
-          onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-          aria-label="Select all"
-        />
-      ),
-      cell: ({ row }) => (
-        <Checkbox
-          checked={row.getIsSelected()}
-          onCheckedChange={(value) => row.toggleSelected(!!value)}
-          aria-label="Select row"
-        />
-      ),
-      enableSorting: false,
-      enableHiding: false,
-   },
+  
   {
       accessorKey:"name",
       header: "Name",
@@ -42,13 +37,6 @@ const columns: ColumnDef<InsertEmployee>[] = [
       header: "LastName",
       cell:({row})=> row.getValue("lastName")
   },
-//   {
-//       accessorKey: "status",
-//       header: "Status",
-//       cell: ({ row }) => (
-//          <div className="capitalize">{row.getValue("status")}</div>
-//     ),
-//   },
   {
       accessorKey: "phone",
       header: "Phone",
@@ -82,24 +70,83 @@ const columns: ColumnDef<InsertEmployee>[] = [
     },
   },
   {
-    id: "actions",
-    header: () => <div className="text-center">Action</div>,
-    enableHiding: false,
-    cell: ({ row }) => {
+      accessorKey: "profile",
+      header: "profile",
+      cell: ({ row }) =>{
+   const { data } = supabase.storage.from('employee').getPublicUrl(row.original.imageName ?? "")
+         
+         console.log("Column: "+data.publicUrl)
+         // return <HoverCardDemo imgName={data.publicUrl} />
+         return (
+            // <div className="flex flex-col max-w-md p-6 dark:bg-gray-50 dark:text-gray-800">
+            //     {/* <Image src={data.publicUrl} width={50} height={50} alt=""  unoptimized /> */}
+            //     <img src={data.publicUrl}  alt="" />
+            // </div>
+            <Avatar>
+               <AvatarImage src={data.publicUrl} alt="@shadcn" />
+               <AvatarFallback>CN</AvatarFallback>
+          </Avatar>
+         )
+      }
+   },
+
+   {
+      id: "actions",
+      cell: ({ row }) => {
+        const employee = row.original
+   
+        return (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="h-8 w-8 p-0">
+                <span className="sr-only">Open menu</span>
+                <MoreHorizontal className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+              {/* <DropdownMenuItem
+                onClick={() => navigator.clipboard.writeText(employee.code)}
+              >
+                Copy employee code
+              </DropdownMenuItem> */}
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>
+                  <Link href={`/dashboard/delete/${employee.id}`}>Delete the employee</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                  <Link href={`/dashboard/update/${employee.id}`}>update the employee</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                  <Link href={`/dashboard/update-img/${employee.id}`}>update Image</Link>
+              </DropdownMenuItem>
+              {/* <DropdownMenuItem>View payment details</DropdownMenuItem> */}
+            </DropdownMenuContent>
+          </DropdownMenu>
+        )
+      },
+    },
+//   {
+//     id: "actions",
+//     header: () => <div className="text-center">Action</div>,
+//     enableHiding: false,
+//     cell: ({ row }) => {
 
     
-      const employee = row.original
+//       const employee = row.original
 
-      return(
-         <div className="flex w-full justify-between">
-            <FormDialogView id={employee.id}>
-               <Button variant="outline"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-pencil"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/></svg></Button>
-            </FormDialogView>
-            <AlertDialogView id={employee.id} />         
-       </div>
-      )
-    },
-  },
+//       return(
+//          <div className="flex w-10/12 justify-end">
+//             <div className="">
+//                <FormDialogView id={employee.id}>
+//                   <Button variant="outline"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-pencil"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/></svg></Button>
+//                </FormDialogView>
+//                <AlertDialogView id={employee.id} />    
+//             </div>                
+//        </div>
+//       )
+//     },
+//   },
 ]
 
 export default columns;
