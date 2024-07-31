@@ -55,6 +55,9 @@ const Header = () => {
              This application will be an employee management dashboard built with Next.js. It will allow HR personnel or managers to view, edit, and manage employee information, as well as track performance and other relevant data.
              </p>
            </div>
+           <div className="font-bold text-lg md:text-xl lg:text-2xl">
+               This project utilizes Supabase, Drizzle, TanStack, Zod, and ShadCN for its features and functionality. The styling is managed using Tailwind CSS
+            </div>
          </div>
        </div>
      </div>
